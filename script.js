@@ -256,7 +256,7 @@ checkoutBtn.addEventListener("click", function(){
     let endereco = `Endereço: (rua: ${rua.value} | bairro: ${bairro.value} | cidade: ${cidade.value} | UF: ${uf.value} | numero: ${numero.value})`
 
     window.open(`https://wa.me/${phone}?text=${message} ${endereco} | Total Pedido: ${cartTotal.textContent} 
-               | ${mensagem}`, "_blank")
+               `, "_blank")
 
     cart = []
     updateCartModal()
