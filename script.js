@@ -268,7 +268,7 @@ checkoutBtn.addEventListener("click", function(){
 function checkLojaOpen(){
     const data = new Date()
     const hora = data.getHours()
-    return hora >= 0 && hora <= 16  //true = loja aberto
+    return hora >= 9 && hora <= 16  //true = loja aberto
 }
 
 const spanItem = document.getElementById('date-span');
