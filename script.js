@@ -7,10 +7,28 @@ const cartTotal = document.getElementById('cart-total')
 const checkoutBtn = document.getElementById('checkout-btn')
 const closeModalBtn = document.getElementById('close-modal-btn')
 const cartCounter = document.getElementById('cart-count')
-const addressInput = document.getElementById('address')
 const addressWarn = document.getElementById('address-warn')
 
 let cart = [];
+
+
+//Dados de endereço:
+ const rua =     document.getElementById('rua')
+ const bairro =  document.getElementById('bairro')
+ const cidade =  document.getElementById('cidade')
+ const uf =      document.getElementById('uf')
+ const numero =  document.getElementById('numero')
+
+
+ //Dados de pagamento
+
+const radios = document.querySelectorAll('input[name="pagamento"]')
+const trocoDiv = document.getElementById("trocoDiv")
+const paymentWarn = document.getElementById("payment-warn")
+
+const pagamentoSelecionado = document.querySelector('input[name="pagamento"]:checked')
+
+
 
 
 
@@ -124,7 +142,7 @@ function removeItemCart(name){
         updateCartModal()
     }
 }
-
+/*
 addressInput.addEventListener("input", function(event){
     let inputValue = event.target.value;
 
@@ -134,15 +152,73 @@ addressInput.addEventListener("input", function(event){
     }
 
 })
+    */
+
+
+rua.addEventListener("input", function(event){
+    let inputValue = event.target.value;
+
+    if(inputValue !== ''){
+        rua.classList.remove('border-red-500')
+        addressWarn.classList.add('hidden')
+    }
+
+})
+
+
+bairro.addEventListener("input", function(event){
+    let inputValue = event.target.value;
+
+    if(inputValue !== ''){
+        bairro.classList.remove('border-red-500')
+        addressWarn.classList.add('hidden')
+    }
+
+})
+
+
+cidade.addEventListener("input", function(event){
+    let inputValue = event.target.value;
+
+    if(inputValue !== ''){
+        cidade.classList.remove('border-red-500')
+        addressWarn.classList.add('hidden')
+    }
+
+})
+
+
+uf.addEventListener("input", function(event){
+    let inputValue = event.target.value;
+
+    if(inputValue !== ''){
+        uf.classList.remove('border-red-500')
+        addressWarn.classList.add('hidden')
+    }
+
+})
+
+
+numero.addEventListener("input", function(event){
+    let inputValue = event.target.value;
+
+    if(inputValue !== ''){
+        numero.classList.remove('border-red-500')
+        addressWarn.classList.add('hidden')
+    }
+
+})
+
+
 
 //Finalizar pedido
 checkoutBtn.addEventListener("click", function(){
     
-    const isOpen = checkRestaurantOpen();
+    const isOpen = true;
 
   if(!isOpen){
     Toastify({
-    text: "Ops, a hamburgueria está fechada!",
+    text: "Ops, a loja está fechada!",
     duration: 3000,
     close: true,
     gravity: "top",
@@ -156,13 +232,14 @@ checkoutBtn.addEventListener("click", function(){
     return;
     }
 
+
   
 
     if(cart.length === 0) return;
 
-    if(addressInput.value === ''){
+    if(rua.value === '' || bairro.value === '' || cidade.value === '' || uf.value === '' || numero.value === ''){
         addressWarn.classList.remove("hidden")
-        addressInput.classList.add('border-red-500')
+       // addressInput.classList.add('border-red-500')
         return;
     }
 
@@ -174,9 +251,12 @@ checkoutBtn.addEventListener("click", function(){
     }).join("")
 
     const message = encodeURIComponent(cartItems)
-    const phone = '98983384251'
+    const phone = '98982675733'
 
-    window.open(`https://wa.me/${phone}?text=${message} Endereço: ${addressInput.value}`, "_blank")
+    let endereco = `Endereço: (rua: ${rua.value} | bairro: ${bairro.value} | cidade: ${cidade.value} | UF: ${uf.value} | numero: ${numero.value})`
+
+    window.open(`https://wa.me/${phone}?text=${message} ${endereco} | Total Pedido: ${cartTotal.textContent} 
+               | ${mensagem}`, "_blank")
 
     cart = []
     updateCartModal()
@@ -185,14 +265,14 @@ checkoutBtn.addEventListener("click", function(){
 
 
 //Verificar a hora e manipular o card do horário
-function checkRestaurantOpen(){
+function checkLojaOpen(){
     const data = new Date()
     const hora = data.getHours()
-    return hora >= 19 && hora <= 22  //true = restaurante aberto
+    return hora >= 0 && hora <= 16  //true = loja aberto
 }
 
 const spanItem = document.getElementById('date-span');
-const isOpen = checkRestaurantOpen()
+const isOpen = checkLojaOpen()
 
 if(isOpen){
     spanItem.classList.remove('bg-red-500')
@@ -201,5 +281,75 @@ if(isOpen){
     spanItem.classList.remove('bg-green-600')
     spanItem.classList.add('bg-red-500')
 }
+
+
+
+
+function limpa_formulário_cep() {
+            //Limpa valores do formulário de cep.
+            rua.value = ''
+            bairro.value = ''
+            cidade.value = ''
+            uf.value = ''
+            numero.value = ''
+    }
+
+    function meu_callback(conteudo) {
+        if (!("erro" in conteudo)) {
+            //Atualiza os campos com os valores.
+            rua.value=(conteudo.logradouro);
+            bairro.value=(conteudo.bairro);
+            cidade.value=(conteudo.localidade);
+            uf.value=(conteudo.uf);
+           // numero.value=(conteudo.numero);
+        } //end if.
+        else {
+            //CEP não Encontrado.
+            limpa_formulário_cep();
+            alert("CEP não encontrado.");
+        }
+    }
+        
+    function pesquisacep(valor) {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = valor.replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if(validacep.test(cep)) {
+
+                //Preenche os campos com "..." enquanto consulta webservice.
+                rua.value="...";
+                bairro.value="...";
+                cidade.value="...";
+                uf.value="...";
+
+                //Cria um elemento javascript.
+                var script = document.createElement('script');
+
+                //Sincroniza com o callback.
+                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+
+                //Insere script no documento e carrega o conteúdo.
+                document.body.appendChild(script);
+
+            } //end if.
+            else {
+                //cep é inválido.
+                limpa_formulário_cep();
+                alert("Formato de CEP inválido.");
+            }
+        } //end if.
+        else {
+            //cep sem valor, limpa formulário.
+            limpa_formulário_cep();
+        }
+    };
 
 
