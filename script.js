@@ -214,7 +214,7 @@ numero.addEventListener("input", function(event){
 //Finalizar pedido
 checkoutBtn.addEventListener("click", function(){
     
-    const isOpen = true;
+    const isOpen = checkLojaOpen();
 
   if(!isOpen){
     Toastify({

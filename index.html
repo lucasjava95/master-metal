@@ -773,16 +773,16 @@
 
              <!--PRODUTO ITEM-->
              <div class="flex gap-2">
-                <img src="./assets/testaman.jpeg" alt="camisa Testaman" class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2
+                <img src="./assets/testaman.jpeg" alt="camisa Testament" class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2
                 duration-300"/>
                 
                 <div>
-                    <p class="font-bold">Testaman</p>
-                    <p class="text-sm">camisa Testaman.</p>
+                    <p class="font-bold">Testament</p>
+                    <p class="text-sm">camisa Testament.</p>
 
                     <div class="flex items-center gap-2 justify-between mt-3">
                         <p class="font-bold text-lg">R$ 70.00</p>
-                        <button class="bg-gray-900 cursor-pointer px-5 rounded add-to-cart-btn" data-name="camisa Testaman"
+                        <button class="bg-gray-900 cursor-pointer px-5 rounded add-to-cart-btn" data-name="camisa Testament"
                          data-price="70.00">
                             <i class="fa fa-cart-plus text-lg text-white"></i>
                         </button>
@@ -885,16 +885,16 @@
 
               <!--PRODUTO ITEM-->
              <div class="flex gap-2">
-                <img src="./assets/rainbom_rising.jpeg" alt="camisa Rainbom rising" class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2
+                <img src="./assets/rainbom_rising.jpeg" alt="camisa Rainbow rising" class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2
                 duration-300"/>
                 
                 <div>
-                    <p class="font-bold">Rainbom rising</p>
-                    <p class="text-sm">camisa Rainbom rising.</p>
+                    <p class="font-bold">Rainbow rising</p>
+                    <p class="text-sm">camisa Rainbow rising.</p>
 
                     <div class="flex items-center gap-2 justify-between mt-3">
                         <p class="font-bold text-lg">R$ 70.00</p>
-                        <button class="bg-gray-900 cursor-pointer px-5 rounded add-to-cart-btn" data-name="camisa Rainbom rising"
+                        <button class="bg-gray-900 cursor-pointer px-5 rounded add-to-cart-btn" data-name="camisa Rainbow rising"
                          data-price="70.00">
                             <i class="fa fa-cart-plus text-lg text-white"></i>
                         </button>
@@ -1264,7 +1264,7 @@
         <!--MODAL CART-->
            <div class="bg-black/60 w-full h-full fixed top-0 left-0 z-99 items-center justify-center hidden" id="cart-modal">
             <div class="bg-white p-5 rounded-md min-w-[90%] md:min-w-150">
-               <h2 class="text-center font-bold text-2xl mb-2">Meu carrinho</h2>
+               <h2 class="text-center font-bold text-2xl mb-1 mt-0">Meu carrinho</h2>
 
                <div id="cart-items" class="flex justify-between mb-2 flex-col">
                </div>
@@ -1273,31 +1273,33 @@
 
                <br/>
 
-               <p class="text-red-400 font-bold">Obs: O total da compra não inclui o valor do frete</p>
+               <p class="text-red-400 font-bold">Obs: O total (R$) não inclui o valor do frete</p>
 
                         
 
-               <p class="font-bold mt-4">Endereço de entrega:</p>
+               <p class="font-bold mt-2 mb-1">Endereço de entrega:</p>
                 
                <form method="get" action=".">
                     <label>Cep:
                     <input name="cep" type="text" id="cep" value="" size="10" maxlength="9"
-                        onblur="pesquisacep(this.value);" /></label><br />
+                      onblur="pesquisacep(this.value);" class="border border-gray-300 outline-none focus:border-blue-500" />
+                    </label>
+                    <br />
                     <label>Rua:
-                    <input name="rua" type="text" id="rua" size="60" /></label><br />
+                    <input name="rua" type="text" id="rua" size="60" class="border border-gray-300 outline-none focus:border-blue-500"  /></label><br />
                     <label>Bairro:
-                    <input name="bairro" type="text" id="bairro" size="40" /></label><br />
+                    <input name="bairro" type="text" id="bairro" size="40" class="border border-gray-300 outline-none focus:border-blue-500"  /></label><br />
                     <label>Cidade:
-                    <input name="cidade" type="text" id="cidade" size="40" /></label><br />
+                    <input name="cidade" type="text" id="cidade" size="40" class="border border-gray-300 outline-none focus:border-blue-500"  /></label><br />
                     <label>Estado:
-                    <input name="uf" type="text" id="uf" size="2" /></label><br />
+                    <input name="uf" type="text" id="uf" size="2" class="border border-gray-300 outline-none focus:border-blue-500"  /></label><br />
                     <label>Número:
-                    <input name="numero" type="text" id="numero" size="8" /></label><br />
+                    <input name="numero" type="text" id="numero" size="8" class="border border-gray-300 outline-none focus:border-blue-500"  /></label><br />
                </form>
 
                <p class="text-red-500 hidden" id="address-warn">Digite seu endereço completo!</p>
 
-               <div class="flex items-center justify-between mt-5 w-full">
+               <div class="flex items-center justify-between mt-1 w-full">
                  <button id="close-modal-btn" class="cursor-pointer">Fechar</button>
                  <button id="checkout-btn" class="bg-green-500 text-white px-4 py-1 rounded cursor-pointer">Finalizar pedido</button>
                </div>
